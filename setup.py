@@ -1,11 +1,11 @@
 from setuptools import setup
 
 setup(
-    name='atom_data',
-    packages=['atom_data'],
-    url='https://github.com/raphtown/atom_data',
-    version='0.1.3',
-    description='Atomic Data Processing',
+    name='atom3',
+    packages=['atom3'],
+    url='https://github.com/raphtown/atom3',
+    version='0.1.0',
+    description='3D Atomic Data Processing',
     long_description=open("README.rst").read(),
     author='Raphael Townshend',
     license='MIT',
@@ -16,4 +16,9 @@ setup(
         'pandas',
         'scipy',
     ],
+    entry_points={
+        'console_scripts': [
+            "atom3 = atom3.main:main",
+        ]
+    }
 )
