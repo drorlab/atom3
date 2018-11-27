@@ -3,3 +3,4 @@
 
 # external requirements
 flake8
+twine
