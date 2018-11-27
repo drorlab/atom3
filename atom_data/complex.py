@@ -17,7 +17,7 @@ def add_complexes_parser(subparsers, pp):
         complexes(args.pkl_dataset, args.output_dill, args.type)
 
     ap = subparsers.add_parser(
-        'complexes', description='pdb files to complexes',
+        'complex', description='pdb files to complexes',
         help='processes pdb dataset to complexes',
         parents=[pp])
     ap.set_defaults(func=complexes_main)
@@ -25,7 +25,8 @@ def add_complexes_parser(subparsers, pp):
     ap.add_argument('output_dill', metavar='complexes.dill', type=str,
                     help='dill file to output complexes to')
     ap.add_argument(
-        '-t', '--type', dest='type', choices=['rcsb', 'db5', 'dockground', 'db5mut', 'hotspot'],
+        '-t', '--type', dest='type',
+        choices=['rcsb', 'db5', 'dockground', 'db5mut', 'hotspot'],
         default='rcsb', help='type of dataset (default: rcsb)')
 
 
@@ -38,6 +39,7 @@ def complexes(pkl_dataset, output_dill, type):
     logging.info("Getting complexes...")
     complexes = get_complexes(filenames, type)
     write_complexes(complexes, output_dill)
+
 
 def get_complexes(filenames, type):
     """
@@ -91,6 +93,7 @@ def _get_rcsb_complexes(filenames):
                                   unbound_filenames=[])
     return complexes
 
+
 def _get_db5_complexes_mut(filenames):
     filenames = [f for f in filenames if 'mut' in f] #screen the original non mutant
     basenames = [os.path.basename(f) for f in filenames]
@@ -105,6 +108,7 @@ def _get_db5_complexes_mut(filenames):
         ru = [x for x in filenames if code4 in x and mutnum in x and '_r_u_' in x][0]
         complexes[pdb] = Complex(name=pdb, bound_filenames=[lb, rb], unbound_filenames=[lu, ru])
     return complexes
+
 
 def _get_db5_complexes_hotspot_mut(filenames):
     filenames = sorted(filenames)
@@ -126,6 +130,7 @@ def _get_db5_complexes_hotspot_mut(filenames):
         else:
             complexes[pdb] = Complex(name=pdb, bound_filenames=[file_pairs[pdb][1], file_pairs[pdb][0]], unbound_filenames=[None, None])
     return complexes
+
 
 def _get_db5_complexes(filenames, keyer=db.get_pdb_code):
     """Get complexes for docking benchmark 5 type dataset."""
