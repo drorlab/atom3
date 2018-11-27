@@ -30,3 +30,10 @@ Split subunits into interacting pairs.
 .. code-block:: console
 
     $ python main.py pairs sample/complexes.dill sample/pairs
+
+For help on commands.
+
+.. code-block:: console
+
+    $ python main.py -h
+    $ python main.py pairs -h
