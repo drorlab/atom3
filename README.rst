@@ -28,4 +28,5 @@ Derive subunits of a parsed dataframe.
 Split subunits into interacting pairs.
 
 .. code-block:: console
+
     $ python main.py pairs sample/complexes.dill sample/pairs
