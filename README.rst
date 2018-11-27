@@ -36,4 +36,4 @@ For help on commands.
 .. code-block:: console
 
     $ atom3 -h
-    $ atom3 -h
+    $ atom3 parse -h
