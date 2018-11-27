@@ -14,5 +14,6 @@ setup(
         'easy-parallel',
         'h5py',
         'pandas',
+        'scipy',
     ],
 )
