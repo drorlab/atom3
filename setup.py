@@ -4,7 +4,7 @@ setup(
     name='atom_data',
     packages=['atom_data'],
     url='https://github.com/raphtown/atom_data',
-    version='0.1.2',
+    version='0.1.3',
     description='Atomic Data Processing',
     long_description=open("README.rst").read(),
     author='Raphael Townshend',
