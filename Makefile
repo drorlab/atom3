@@ -5,7 +5,7 @@
 #################################################################################
 
 PROJECT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
-PROJECT_NAME = atom-data
+PROJECT_NAME = atom_data
 PYTHON_INTERPRETER = python
 
 #################################################################################
