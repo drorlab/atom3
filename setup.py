@@ -1,10 +1,10 @@
-from setuptools import find_packages, setup
+from setuptools import setup
 
 setup(
-    name='atom-data',
-    packages=find_packages(),
-    url='https://github.com/raphtown/atom-data',
-    version='0.1.0',
+    name='atom_data',
+    packages=['atom_data'],
+    url='https://github.com/raphtown/atom_data',
+    version='0.1.2',
     description='Atomic Data Processing',
     long_description=open("README.rst").read(),
     author='Raphael Townshend',
