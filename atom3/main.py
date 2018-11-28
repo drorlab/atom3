@@ -21,7 +21,7 @@ def add_pipeline_parsers(subparsers, pp):
 
 def main():
     """Process all arguments."""
-    p = ap.ArgumentParser(description='Protein Complex Prediction.')
+    p = ap.ArgumentParser(description='3D Atom Processing.')
 
     pp = ap.ArgumentParser(add_help=False)
     pp.add_argument('-l', metavar='log', type=str,

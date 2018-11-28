@@ -28,8 +28,8 @@ def add_pairs_parser(subparsers, pp):
         all_complexes_to_pairs_full(args)
 
     ap = subparsers.add_parser(
-        'pairs', description='pdb files to pairs',
-        help='processes pdb dataset to pairs of interacting subunits',
+        'pairs', description='complexes to pairs',
+        help='uses output of the complex command to split pickled proteins',
         parents=[pp])
     ap.set_defaults(func=all_complexes_to_pairs_main)
     ap.add_argument('complexes_dill', metavar='complexes.dill', type=str,

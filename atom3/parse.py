@@ -15,7 +15,7 @@ def add_parse_parser(subparsers, pp):
 
     ap = subparsers.add_parser(
         'parse', description='pdb to dataframe',
-        help='processes pdb dataset to individual pickled dataframes',
+        help='pdb dataset to pickled dataframes',
         parents=[pp])
     ap.set_defaults(func=parse_all_main)
     ap.add_argument('pdb_dataset', metavar='pdb', type=str,

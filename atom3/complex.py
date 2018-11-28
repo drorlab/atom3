@@ -17,8 +17,8 @@ def add_complexes_parser(subparsers, pp):
         complexes(args.pkl_dataset, args.output_dill, args.type)
 
     ap = subparsers.add_parser(
-        'complex', description='pdb files to complexes',
-        help='processes pdb dataset to complexes',
+        'complex', description='pickled file mapping to complexes',
+        help='maps protein complexes to their individual subunits',
         parents=[pp])
     ap.set_defaults(func=complexes_main)
     ap.add_argument('pkl_dataset', type=str, help='pkl dataset')
