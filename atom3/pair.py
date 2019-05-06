@@ -7,11 +7,11 @@ import os
 import numpy as np
 import pandas as pd
 
-import case as ca
-import complex as comp
-import database as db
-import neighbors as nb
-import structure as struct
+import atom3.case as ca
+import atom3.complex as comp
+import atom3.database as db
+import atom3.neighbors as nb
+import atom3.structure as struct
 import parallel as par
 
 Pair = col.namedtuple(

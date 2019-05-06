@@ -13,8 +13,8 @@ import h5py
 import numpy as np
 import pandas as pd
 
-import database as db
-import structure as struct
+import atom3.database as db
+import atom3.structure as struct
 import parallel as par
 
 PSSMInfo = col.namedtuple('PSSMInfo', ['pdb_filename', 'chain', 'pssm', 'psfm',
