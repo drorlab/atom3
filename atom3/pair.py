@@ -97,7 +97,7 @@ def complex_to_pairs(complex, get_pairs, output_dir):
                  .format(name, len(pairs), num_subunits))
     sub_dir = output_dir + '/' + db.get_pdb_code(name)[1:3]
     f = name
-    if 'mut' in f:
+    if ('mut' in f) and ('mut' not in db.get_pdb_code(name)):
         pdb = db.get_pdb_code(name)(f) + f[f.rfind('_') + 1: f.find('.')]
         sub_dir = output_dir + '/' + pdb
     with sem:
