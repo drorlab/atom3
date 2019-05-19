@@ -17,8 +17,11 @@ def gen_pssm(pdb_filename, blastdb, output_filename):
     """Generate PSSM and PSFM from sequence."""
     pdb_name = db.get_pdb_name(pdb_filename)
     out_dir = os.path.dirname(output_filename)
-    fasta_format = out_dir + "/{:}.fa"
-    id_format = out_dir + "/{:}.cpkl"
+    work_dir = os.path.join(out_dir, 'work')
+    if not os.path.exists(work_dir):
+        os.makedirs(work_dir)
+    fasta_format = work_dir + "/{:}.fa"
+    id_format = work_dir + "/{:}.cpkl"
     chains, chain_fasta_filenames, id_filenames = sequ.pdb_to_fasta(
         pdb_filename, fasta_format, id_format, True)
 
