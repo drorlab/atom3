@@ -18,7 +18,7 @@ def gen_pssm(pdb_filename, blastdb, output_filename):
     pdb_name = db.get_pdb_name(pdb_filename)
     out_dir = os.path.dirname(output_filename)
     fasta_format = out_dir + "/{:}.fa"
-    id_format = out_dir + "/{:}.pkl"
+    id_format = out_dir + "/{:}.cpkl"
     chains, chain_fasta_filenames, id_filenames = sequ.pdb_to_fasta(
         pdb_filename, fasta_format, id_format, True)
 
@@ -100,8 +100,12 @@ def map_pssms(pdb_filename, blastdb, output_filename):
     num_chains = len(pis.groupby(['pdb_name', 'model', 'chain']))
     elapsed_blasting = timeit.default_timer() - start_time_blasting
 
+    parsed = pd.read_pickle(pdb_filename)
+    parsed = parsed.merge(
+        pis, on=['model', 'pdb_name', 'chain', 'residue', 'resname'])
+
     start_time_writing = timeit.default_timer()
-    pis.to_pickle(output_filename)
+    parsed.to_pickle(output_filename)
     elapsed_writing = timeit.default_timer() - start_time_writing
 
     elapsed = timeit.default_timer() - start_time
@@ -178,8 +182,8 @@ def map_all_pssms(pdb_dataset, blastdb, output_dir, log, num_cpus):
     requested_keys = [db.get_pdb_name(x)
                       for x in requested_filenames]
     produced_filenames = db.get_structures_filenames(
-        output_dir, extension='.al2co')
-    produced_keys = [db.get_pdb_name(x,)
+        output_dir, extension='.pkl')
+    produced_keys = [db.get_pdb_name(x)
                      for x in produced_filenames]
     work_keys = [key for key in requested_keys if key not in produced_keys]
     work_filenames = [x[0] for x in
