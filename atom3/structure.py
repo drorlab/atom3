@@ -13,7 +13,7 @@ import Bio.PDB.Polypeptide as poly
 import numpy as np
 import pandas as pd
 
-import atom3.database as db
+import database as db
 
 # Max number of residues allowed.  Prevents processing of massive PDB
 # structures.

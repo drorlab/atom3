@@ -3,8 +3,8 @@ import logging
 import os
 import dill
 
-import atom3.case as ca
-import atom3.database as db
+import case as ca
+import database as db
 
 Complex = col.namedtuple(
     'Complex', ['name', 'bound_filenames', 'unbound_filenames'])

@@ -2,8 +2,8 @@ import logging
 import multiprocessing as mp
 import os
 
-import atom3.database as db
-import atom3.structure as struct
+import database as db
+import structure as struct
 import parallel as par
 
 

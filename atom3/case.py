@@ -10,11 +10,11 @@ import Bio.SeqIO
 import Bio.SVDSuperimposer as svd
 import multiprocessing as mp
 import numpy as np
-
-import atom3.database as db
-import atom3.sequence as sequ
-import atom3.structure as struct
 import parallel as par
+
+import database as db
+import sequence as sequ
+import structure as struct
 
 
 def add_clean_parser(subparsers, pp):

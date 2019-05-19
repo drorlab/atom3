@@ -11,6 +11,7 @@ setup(
     license='MIT',
     install_requires=[
         'biopython',
+        'click',
         'easy-parallel',
         'h5py',
         'pandas',
