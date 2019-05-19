@@ -9,13 +9,11 @@ def setup_logger(log_file):
     root = logging.getLogger()
     map(root.removeHandler, root.handlers[:])
     if len(log_file) == 0:
-        print("WFKWJFW")
         logging.basicConfig(stream=sys.stdout,
                             format='%(asctime)s %(levelname)s %(process)d: ' +
                             '%(message)s',
                             level=logging.INFO)
     else:
-        print("SJFLJSF")
         log_dir = os.path.dirname(log_file)
         if len(log_dir) != 0 and not os.path.exists(log_dir):
             os.makedirs(log_dir)
