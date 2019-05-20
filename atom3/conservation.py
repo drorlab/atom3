@@ -73,14 +73,14 @@ def gen_pssm(pdb_filename, blastdb, output_filename):
             _al2co(clustal_filename, al2co_filename)
 
         if os.stat(pssm_filename).st_size != 0:
-            pssm = pd.read_table(
+            pssm = pd.read_csv(
                 pssm_filename, skiprows=2, skipfooter=6, delim_whitespace=True,
                 engine='python', usecols=range(20), index_col=[0, 1])
             pssm = pssm.reset_index()
             del pssm['level_0']
             pssm.rename(columns={'level_1': 'orig'}, inplace=True)
 
-            pscm = pd.read_table(
+            pscm = pd.read_csv(
                 pssm_filename, skiprows=2, skipfooter=6, delim_whitespace=True,
                 engine='python', usecols=range(20, 40), index_col=[0, 1])
             psfm = pscm.applymap(lambda x: x / 100.)
@@ -88,12 +88,12 @@ def gen_pssm(pdb_filename, blastdb, output_filename):
             del psfm['level_0']
             psfm.columns = pssm.columns
             del psfm['orig']
+            del pssm['orig']
 
             # Combine both into one.
             psfm = psfm.add_prefix('psfm_')
             pssm = pssm.add_prefix('pssm_')
-            pssm.rename(columns={'pssm_orig': 'resname'}, inplace=True)
-            al2co = pd.read_table(
+            al2co = pd.read_csv(
                 al2co_filename, delim_whitespace=True, usecols=[2],
                 names=['al2co'])
             pssm = pd.concat([pssm, psfm, al2co], axis=1)
@@ -126,7 +126,7 @@ def map_pssms(pdb_filename, blastdb, output_filename):
 
     parsed = pd.read_pickle(pdb_filename)
     parsed = parsed.merge(
-        pis, on=['model', 'pdb_name', 'chain', 'residue', 'resname'])
+        pis, on=['model', 'pdb_name', 'chain', 'residue'])
 
     start_time_writing = timeit.default_timer()
     parsed.to_pickle(output_filename)
