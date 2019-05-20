@@ -4,7 +4,6 @@ BioPython PDB Sructure wrapper class.
 Allows for extraction of regions from the structure.
 """
 import logging
-import math
 import os
 import re
 
@@ -13,7 +12,7 @@ import Bio.PDB.Polypeptide as poly
 import numpy as np
 import pandas as pd
 
-import database as db
+import atom3.database as db
 
 # Max number of residues allowed.  Prevents processing of massive PDB
 # structures.

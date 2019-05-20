@@ -1,16 +1,37 @@
 import cPickle as pickle
 import logging
+import multiprocessing as mp
 import os
 import subprocess
 import timeit
 
-import click
 import pandas as pd
 import parallel as par
 
-import database as db
-import sequence as sequ
-import util
+import atom3.database as db
+import atom3.sequence as sequ
+
+
+def add_conservation_parser(subparsers, pp):
+    """Add parser."""
+
+    def map_all_pssms_main(args):
+        map_all_pssms(args.pkl_dataset, args.blastdb, args.output_dir, args.c)
+
+    ap = subparsers.add_parser(
+        'conservation', description='sequence conservation',
+        help='compute sequence conservation features',
+        parents=[pp])
+    ap.set_defaults(func=map_all_pssms_main)
+    ap.add_argument('pkl_dataset', metavar='pkl', type=str,
+                    help='parsed dataset')
+    ap.add_argument('blastdb', metavar='bdb', type=str,
+                    help='blast database to do lookups on')
+    ap.add_argument('output_dir', metavar='output', type=str,
+                    help='directory to output to')
+    ap.add_argument('-c', metavar='cpus', default=mp.cpu_count(), type=int,
+                    help='number of cpus to use for processing (default:'
+                    ' number processors available on current machine)')
 
 
 def gen_pssm(pdb_filename, blastdb, output_filename):
@@ -170,15 +191,7 @@ def _al2co(clustal_in, al2co_out):
             f_out.write('================= END CALL =================\n')
 
 
-@click.command()
-@click.argument('pdb_dataset', type=click.Path(exists=True))
-@click.argument('blastdb', type=click.Path())
-@click.argument('output_dir', type=click.Path())
-@click.option('--log', '-l', type=click.Path(), default='')
-@click.option('--num_cpus', '-c', default=1)
-def map_all_pssms(pdb_dataset, blastdb, output_dir, log, num_cpus):
-    util.setup_logger(log)
-
+def map_all_pssms(pdb_dataset, blastdb, output_dir, num_cpus):
     ext = '.pkl'
     requested_filenames = \
         db.get_structures_filenames(pdb_dataset, extension=ext)
@@ -208,8 +221,3 @@ def map_all_pssms(pdb_dataset, blastdb, output_dir, log, num_cpus):
     inputs = [(key, blastdb, output)
               for key, output in zip(work_filenames, output_filenames)]
     par.submit_jobs(map_pssms, inputs, num_cpus)
-    util.end_logger()
-
-
-if __name__ == '__main__':
-    map_all_pssms()

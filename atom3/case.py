@@ -12,9 +12,9 @@ import multiprocessing as mp
 import numpy as np
 import parallel as par
 
-import database as db
-import sequence as sequ
-import structure as struct
+import atom3.database as db
+import atom3.sequence as sequ
+import atom3.structure as struct
 
 
 def add_clean_parser(subparsers, pp):

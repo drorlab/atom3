@@ -8,8 +8,8 @@ import Bio.SeqRecord
 import Bio.PDB.Polypeptide as poly
 import pandas as pd
 
-import structure as struct
-import database as db
+import atom3.structure as struct
+import atom3.database as db
 
 
 def write_fasta(seq_dict, fasta_out, id_out=None):
