@@ -56,7 +56,7 @@ def parse_biopython_structure(pdb_filename):
     _, ext = os.path.splitext(pdb_filename)
 
     if ext == ".gz":
-        biopy_structure = parser.get_structure('pdb', gzip.open(pdb_filename))
+        biopy_structure = parser.get_structure('pdb', gzip.open(pdb_filename,'rt'))
     elif ".pdb" in ext:
         biopy_structure = parser.get_structure('pdb', pdb_filename)
     else:
