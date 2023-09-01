@@ -308,11 +308,11 @@ def df_to_pdb(df_in):
     """Convert df to pdb."""
     df = df_in.copy()
     new_structure = Bio.PDB.Structure.Structure('')
-    for (model, m_atoms) in df.groupby(['model']):
+    for (model, m_atoms) in df.groupby('model', sort = False):
         new_model = Bio.PDB.Model.Model(model)
-        for (chain, c_atoms) in m_atoms.groupby(['chain']):
+        for (chain, c_atoms) in m_atoms.groupby('chain', sort = False):
             new_chain = Bio.PDB.Chain.Chain(chain)
-            for (residue, r_atoms) in c_atoms.groupby(['residue']):
+            for (residue, r_atoms) in c_atoms.groupby('residue', sort = False):
                 new_residue = residue_to_pdbresidue(residue, r_atoms)
                 new_chain.add(new_residue)
             new_model.add(new_chain)
